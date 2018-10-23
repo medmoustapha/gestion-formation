@@ -1,0 +1,28 @@
+<h3>Gestion des formations </h3>
+<div class="container" *ngIf="listFormations">
+  <div class="panel panel-primary">
+   <div class="panel-heading">List des formations </div>
+    <div class="panel-body">
+      <span *ngFor="let formation of listFormations._embedded.formations">
+        <button class="btn-primary" (click)="ongetEtudiants(formation)" [ngClass]="formation.id == currentFormation.id?'btn btn-danger':'btn btn-primary'">{{formation.nom}}</button>
+      </span>
+      <p></p>
+      <table *ngIf="listEtudiants" class="table table-striped">
+        <thead>
+        <tr>
+          <th>ID</th> <th>NOM</th> <th>PRENOM</th><th>DATE NAISSANCE</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let etudiant of listEtudiants._embedded.etudiants">
+          <td>{{etudiant.id}}</td>
+          <td>{{etudiant.nom}}</td>
+          <td>{{etudiant.prenom}}</td>
+          <td>{{etudiant.dateNaissance  | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
