@@ -1,0 +1,38 @@
+<div class="panel panel-success col-md-6">
+  <div class="panel-heading"><b>Ajouter Etudiant</b></div>
+  <div class="panel-body">
+
+    <form class="" #addEtudiant="ngForm"  (ngSubmit)="add(addEtudiant.value)">
+
+
+      <div class="form-group col-md-8">
+        <label class="col-sm-4 control-label" for="nom">Name:</label>
+        <input class="form-control" name="nom" required maxlength="30" type="text" [(ngModel)]="etudiant.nom" #nom="ngModel">
+      </div>
+      <div class="form-group col-md-8">
+        <label class="col-sm-4 control-label" for="prenom">Prenom:</label>
+        <input class="form-control" name="prenom" required maxlength="30" type="text" [(ngModel)]="etudiant.prenom" #prenom="ngModel">
+      </div>
+
+      <div class="form-group col-md-8">
+        <label class="col-sm-4 control-label" for="dateNaissance">Date Naissance:</label>
+        <input type="date" class="form-control" name="dateNaissance" required [ngModel]="etudiant.dateNaissance |date:'yyyy-MM-dd'" #dateNaissance="ngModel" >
+      </div>
+      <div class="form-group col-md-8">
+        <label class="col-sm-4 control-label" for="idFormation">Formation:</label>
+        <select class="form-control" name="idFormation" [ngModel]="etudiant.idFormation" required #idFormation="ngModel">
+          <option *ngFor="let formation of listFormations._embedded.formations" value={{formation.id}}>{{ formation.nom }}</option>
+        </select>
+      </div>
+      <div class="form-group col-md-8">
+        <div class="col-md-offset-6 col-sm-8">
+          <button class="btn btn-success" [disabled]="!addEtudiant.valid">SAVE</button>
+          <button class="btn btn-info" (click)="goBack()" [disabled]="!addEtudiant.valid">CANCEL</button>
+
+          <div class="alert alert-success alert-dismissible" id="msg1" style="display:none;"></div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

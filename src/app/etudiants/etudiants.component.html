@@ -1,7 +1,6 @@
-<h3>Gestion des formations </h3>
-<div class="container" *ngIf="listFormations">
-  <div class="panel panel-primary">
-   <div class="panel-heading">List des formations </div>
+<div *ngIf="listFormations">
+  <div class="panel panel-success col-md-6">
+   <div class="panel-heading">List des etudiant par formations </div>
     <div class="panel-body">
       <span *ngFor="let formation of listFormations._embedded.formations">
         <button class="btn-primary" (click)="ongetEtudiants(formation)" [ngClass]="formation.id == currentFormation.id?'btn btn-danger':'btn btn-primary'">{{formation.nom}}</button>
@@ -19,9 +18,50 @@
           <td>{{etudiant.nom}}</td>
           <td>{{etudiant.prenom}}</td>
           <td>{{etudiant.dateNaissance  | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+          <td> <button class="btn btn-primary" (click)="delete(etudiant.id,currentFormation.id)"><span class="glyphicon glyphicon-trash"></span></button></td>
         </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-success">
+      <div class="panel-heading"><b>Ajouter en formation </b></div>
+      <div class="panel-body">
+
+        <form class="" #addFormation="ngForm"  (ngSubmit)="addEtudiant(addFormation.value)">
+
+
+          <div class="form-group col-md-8">
+            <label class="col-sm-4 control-label" for="nom">Name:</label>
+            <input class="form-control" name="nom" required maxlength="30" type="text" [(ngModel)]="etudiant.nom" #nom="ngModel">
+          </div>
+          <div class="form-group col-md-8">
+            <label class="col-sm-4 control-label" for="prenom">Prenom:</label>
+            <input class="form-control" name="prenom" required maxlength="30" type="text" [(ngModel)]="etudiant.prenom" #prenom="ngModel">
+          </div>
+
+          <div class="form-group col-md-8">
+            <label class="col-sm-4 control-label" for="dateNaissance">Date Naissance:</label>
+            <input type="date" class="form-control" name="dateNaissance" required max="100" min="1" maxlength="2" [ngModel]="etudiant.dateNaissance" #dateNaissance="ngModel" >
+          </div>
+          <div class="form-group col-md-8">
+            <label class="col-sm-4 control-label" for="formation">Formation:</label>
+            <select name="formation" >
+              <option *ngFor="let formation of listFormations._embedded.formations" >{{ formation.nom }}</option>
+            </select>
+          </div>
+          <div class="form-group col-md-8">
+            <div class="col-md-offset-6 col-sm-8">
+              <button class="btn btn-success" [disabled]="!addFormation.valid">SAVE</button>
+              <button class="btn btn-info" (click)="goBack()" [disabled]="!addFormation.valid">CANCEL</button>
+
+              <div class="alert alert-success alert-dismissible" id="msg1" style="display:none;"></div>
+            </div>
+          </div>
+
+        </form>
+      </div>
     </div>
   </div>
 </div>
