@@ -3,7 +3,7 @@
    <div class="panel-heading">List des etudiant par formations </div>
     <div class="panel-body">
       <span *ngFor="let formation of listFormations._embedded.formations">
-        <button class="btn-primary" (click)="ongetEtudiants(formation)" [ngClass]="formation.id == currentFormation.id?'btn btn-danger':'btn btn-primary'">{{formation.nom}}</button>
+        <button class="btn-primary" (click)="ongetEtudiants(formation.id)" [ngClass]="formation.id == currentFormation?'btn btn-danger':'btn btn-primary'">{{formation.nom}}</button>
       </span>
       <p></p>
       <table *ngIf="listEtudiants" class="table table-striped">
@@ -28,7 +28,7 @@
   </div>
   <div class="col-md-6">
     <div class="panel panel-success">
-      <div class="panel-heading"><b>Ajouter en formation </b></div>
+      <div class="panel-heading"><b>Ajouter en etudiant</b></div>
       <div class="panel-body">
 
         <form class="" #addEt="ngForm"  (ngSubmit)="addEtudiant(addEt.value)">
